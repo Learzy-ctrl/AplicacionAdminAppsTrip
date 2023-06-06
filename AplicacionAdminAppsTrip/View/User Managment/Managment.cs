@@ -8,21 +8,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace AplicacionAdminAppsTrip.View.TripAssignment
+namespace AplicacionAdminAppsTrip.View.User_Managment
 {
-    public partial class Assignment : Form
+    public partial class Managment : Form
     {
         private List<Form> forms = null;
-        public Assignment()
+        public Managment()
         {
             InitializeComponent();
             forms = new List<Form>();
-        }
-
-        private void Assignment_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            var firstform = forms.FirstOrDefault();
-            firstform.Close();
         }
 
         private void BackToMenuBtn_Click(object sender, EventArgs e)
@@ -30,6 +24,12 @@ namespace AplicacionAdminAppsTrip.View.TripAssignment
             var menu = forms.LastOrDefault();
             menu.Show();
             this.Hide();
+        }
+
+        private void Managment_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            var firstform = forms.FirstOrDefault();
+            firstform.Close();
         }
 
         public void SetFormList(List<Form> formlist)

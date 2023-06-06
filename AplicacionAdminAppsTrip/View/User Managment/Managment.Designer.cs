@@ -1,6 +1,6 @@
-﻿namespace AplicacionAdminAppsTrip.View.TripAssignment
+﻿namespace AplicacionAdminAppsTrip.View.User_Managment
 {
-    partial class Assignment
+    partial class Managment
     {
         /// <summary>
         /// Required designer variable.
@@ -28,25 +28,36 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.BackToMenuBtn = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.BackToMenuBtn = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
+            // 
+            // BackToMenuBtn
+            // 
+            this.BackToMenuBtn.Location = new System.Drawing.Point(35, 148);
+            this.BackToMenuBtn.Margin = new System.Windows.Forms.Padding(4);
+            this.BackToMenuBtn.Name = "BackToMenuBtn";
+            this.BackToMenuBtn.Size = new System.Drawing.Size(148, 28);
+            this.BackToMenuBtn.TabIndex = 6;
+            this.BackToMenuBtn.Text = "Regresar Menu";
+            this.BackToMenuBtn.UseVisualStyleBackColor = true;
+            this.BackToMenuBtn.Click += new System.EventHandler(this.BackToMenuBtn_Click);
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(89)))), ((int)(((byte)(104)))));
             this.panel1.Controls.Add(this.pictureBox2);
             this.panel1.Controls.Add(this.pictureBox1);
-            this.panel1.Location = new System.Drawing.Point(1, -2);
+            this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1067, 124);
-            this.panel1.TabIndex = 2;
+            this.panel1.Size = new System.Drawing.Size(1067, 126);
+            this.panel1.TabIndex = 5;
             // 
             // pictureBox2
             // 
@@ -70,28 +81,17 @@
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
-            // BackToMenuBtn
-            // 
-            this.BackToMenuBtn.Location = new System.Drawing.Point(36, 144);
-            this.BackToMenuBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.BackToMenuBtn.Name = "BackToMenuBtn";
-            this.BackToMenuBtn.Size = new System.Drawing.Size(148, 28);
-            this.BackToMenuBtn.TabIndex = 4;
-            this.BackToMenuBtn.Text = "Regresar Menu";
-            this.BackToMenuBtn.UseVisualStyleBackColor = true;
-            this.BackToMenuBtn.Click += new System.EventHandler(this.BackToMenuBtn_Click);
-            // 
-            // Assignment
+            // Managment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1067, 554);
+            this.ClientSize = new System.Drawing.Size(1066, 450);
             this.Controls.Add(this.BackToMenuBtn);
             this.Controls.Add(this.panel1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.Name = "Assignment";
-            this.Text = "Assignment";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Assignment_FormClosed);
+            this.Name = "Managment";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Managment";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Managment_FormClosed);
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -101,9 +101,9 @@
 
         #endregion
 
+        private System.Windows.Forms.Button BackToMenuBtn;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Button BackToMenuBtn;
     }
 }

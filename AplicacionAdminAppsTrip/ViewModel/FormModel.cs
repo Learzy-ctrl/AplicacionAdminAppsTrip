@@ -9,6 +9,12 @@ namespace AplicacionAdminAppsTrip.ViewModel
 {
     public class FormModel
     {
-        public Form form { get; set; }
+        public string key { get; set; }
+
+        public string viaje { get; set; }
+
+        public string fecha { get; set; }
+
+        public string hora { get; set; }
     }
 }

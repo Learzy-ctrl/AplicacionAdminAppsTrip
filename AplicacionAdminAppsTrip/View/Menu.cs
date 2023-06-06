@@ -1,5 +1,9 @@
 ﻿using AplicacionAdminAppsTrip.Controller;
+using AplicacionAdminAppsTrip.View.Reports;
 using AplicacionAdminAppsTrip.View.Sales;
+using AplicacionAdminAppsTrip.View.TripAssignment;
+using AplicacionAdminAppsTrip.View.User_Managment;
+using AplicacionAdminAppsTrip.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,51 +19,90 @@ namespace AplicacionAdminAppsTrip.View
     public partial class Menu : Form
     {
         private readonly Sales.Sales salesForm = null;
-        private List<Form> forms = null;
+        private readonly Assignment assignamentForm = null;
+        private readonly Managment managmentForm = null;
+        private readonly Reports.Reports reportsForm = null;
+        private List<Form> formList = null;
+        private CredentialsVM credentials = null;
         public Menu()
         {
             InitializeComponent();
-            salesForm = new Sales.Sales();  
-            forms = new List<Form>();
+            salesForm = new Sales.Sales();
+            assignamentForm = new Assignment();
+            managmentForm = new Managment();
+            reportsForm = new Reports.Reports();
+            formList = new List<Form>();
+            credentials = new CredentialsVM();
             
+
+        }
+        private void SalesPicture_Click(object sender, EventArgs e)
+        {
+            var firstform = formList.FirstOrDefault();
+            formList.Clear();
+            formList.Add(firstform);
+            formList.Add(this);
+            salesForm.SetFormList(formList);
+            salesForm.Show();
+            this.Hide();
         }
 
-        private void pictureBox3_Click(object sender, EventArgs e)
+        private void AssignamentPicture_Click(object sender, EventArgs e)
         {
-            var text = forms.LastOrDefault().Text;
-            if(text != "Sales")
+            if (credentials.IdAccess == "2")
             {
-                forms.Add(this);
-                salesForm.Show();
-                salesForm.SetFormList(forms);
+                var firstform = formList.FirstOrDefault();
+                formList.Clear();
+                formList.Add(firstform);
+                formList.Add(this);
+                assignamentForm.SetFormList(formList);
+                assignamentForm.Show();
                 this.Hide();
             }
             else
             {
-                var FirstForm = forms.FirstOrDefault();
-                forms.Clear();
-                forms.Add(FirstForm);
-
-                forms.Add(this);
-                salesForm.Show();
-                salesForm.SetFormList(forms);
-                this.Hide();
+                MessageBox.Show("No tienes permiso para esta opcion", "Error Acceso");
             }
+           
+        }
 
-            
+        private void UserManagmentPicture_Click(object sender, EventArgs e)
+        {
+            var firstform = formList.FirstOrDefault();
+            formList.Clear();
+            formList.Add(firstform);
+            formList.Add(this);
+            managmentForm.SetFormList(formList);
+            managmentForm.Show();
+            this.Hide();
+        }
+
+        private void ReportsPicture_Click(object sender, EventArgs e)
+        {
+            var firstform = formList.FirstOrDefault();
+            formList.Clear();
+            formList.Add(firstform);
+            formList.Add(this);
+            reportsForm.SetFormList(formList);
+            reportsForm.Show();
+            this.Hide();
         }
 
         private void label5_Click(object sender, EventArgs e)
         {
-            foreach (var l in forms)
-            {
-                l.Close();
-            }
-            this.Close();
+            var form = formList.FirstOrDefault();
+            form.Close();
         }
-        public void SetFormList(List<Form> formlist)
+
+        public void SetFormList(List<Form> Listform)
         {
-            forms = formlist;
+            formList = Listform;
+        }
+
+        public void SetCredentials(CredentialsVM credentialVM)
+        {
+            credentials = credentialVM;
+            txtNameUser.Text = credentials.Name;
         }
     }
 }
