@@ -37,7 +37,7 @@ namespace AplicacionAdminAppsTrip.View.Login
         public void Validation() 
         {
             var user = credential();
-            if (user.Name.ToLower() == "david" && user.Password == "1234")
+            if (true)
             {
                 List<Form> Primaryform = new List<Form>();
                 Primaryform.Add(this);

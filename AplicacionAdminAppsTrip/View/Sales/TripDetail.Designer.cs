@@ -58,13 +58,17 @@
             this.label11 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
-            this.textBox10 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.txtPrice = new System.Windows.Forms.TextBox();
+            this.SendQuotebtn = new System.Windows.Forms.Button();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.txtService = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
+            this.panel5.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -340,7 +344,7 @@
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(363, 401);
+            this.label18.Location = new System.Drawing.Point(483, 401);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(110, 16);
             this.label18.TabIndex = 36;
@@ -355,35 +359,66 @@
             this.label13.TabIndex = 21;
             this.label13.Text = "Precio Total:";
             // 
-            // textBox10
+            // txtPrice
             // 
-            this.textBox10.Location = new System.Drawing.Point(105, 38);
-            this.textBox10.Name = "textBox10";
-            this.textBox10.Size = new System.Drawing.Size(110, 22);
-            this.textBox10.TabIndex = 22;
+            this.txtPrice.Location = new System.Drawing.Point(105, 38);
+            this.txtPrice.Name = "txtPrice";
+            this.txtPrice.Size = new System.Drawing.Size(110, 22);
+            this.txtPrice.TabIndex = 22;
             // 
-            // button1
+            // SendQuotebtn
             // 
-            this.button1.Location = new System.Drawing.Point(255, 38);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 25;
-            this.button1.Text = "Enviar";
-            this.button1.UseVisualStyleBackColor = true;
+            this.SendQuotebtn.Location = new System.Drawing.Point(255, 38);
+            this.SendQuotebtn.Name = "SendQuotebtn";
+            this.SendQuotebtn.Size = new System.Drawing.Size(75, 23);
+            this.SendQuotebtn.TabIndex = 25;
+            this.SendQuotebtn.Text = "Enviar";
+            this.SendQuotebtn.UseVisualStyleBackColor = true;
+            this.SendQuotebtn.Click += new System.EventHandler(this.SendQuotebtn_Click);
             // 
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.Color.White;
             this.panel4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel4.Controls.Add(this.button1);
-            this.panel4.Controls.Add(this.textBox10);
+            this.panel4.Controls.Add(this.SendQuotebtn);
+            this.panel4.Controls.Add(this.txtPrice);
             this.panel4.Controls.Add(this.label13);
-            this.panel4.Location = new System.Drawing.Point(363, 419);
+            this.panel4.Location = new System.Drawing.Point(479, 419);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(377, 89);
             this.panel4.TabIndex = 35;
             this.panel4.Tag = "";
+            // 
+            // panel5
+            // 
+            this.panel5.BackColor = System.Drawing.Color.White;
+            this.panel5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel5.Controls.Add(this.txtService);
+            this.panel5.Controls.Add(this.label12);
+            this.panel5.Location = new System.Drawing.Point(134, 419);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(308, 89);
+            this.panel5.TabIndex = 37;
+            this.panel5.Tag = "";
+            // 
+            // txtService
+            // 
+            this.txtService.Location = new System.Drawing.Point(130, 39);
+            this.txtService.Name = "txtService";
+            this.txtService.ReadOnly = true;
+            this.txtService.Size = new System.Drawing.Size(152, 22);
+            this.txtService.TabIndex = 22;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(34, 19);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(146, 16);
+            this.label12.TabIndex = 21;
+            this.label12.Text = "Servicio Seleccionado:";
             // 
             // TripDetail
             // 
@@ -391,6 +426,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
             this.ClientSize = new System.Drawing.Size(885, 532);
+            this.Controls.Add(this.panel5);
             this.Controls.Add(this.label18);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.label11);
@@ -410,6 +446,8 @@
             this.panel3.PerformLayout();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
+            this.panel5.ResumeLayout(false);
+            this.panel5.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -447,8 +485,11 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.TextBox textBox10;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TextBox txtPrice;
+        private System.Windows.Forms.Button SendQuotebtn;
         private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.TextBox txtService;
+        private System.Windows.Forms.Label label12;
     }
 }

@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.txtNameUser = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -40,7 +41,6 @@
             this.UserManagmentPicture = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
-            this.txtNameUser = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -62,6 +62,17 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(767, 127);
             this.panel1.TabIndex = 0;
+            // 
+            // txtNameUser
+            // 
+            this.txtNameUser.AutoSize = true;
+            this.txtNameUser.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtNameUser.ForeColor = System.Drawing.Color.White;
+            this.txtNameUser.Location = new System.Drawing.Point(642, 87);
+            this.txtNameUser.Name = "txtNameUser";
+            this.txtNameUser.Size = new System.Drawing.Size(74, 29);
+            this.txtNameUser.TabIndex = 3;
+            this.txtNameUser.Text = "David";
             // 
             // label5
             // 
@@ -195,21 +206,11 @@
             this.pictureBox4.TabStop = false;
             this.pictureBox4.Click += new System.EventHandler(this.AssignamentPicture_Click);
             // 
-            // txtNameUser
-            // 
-            this.txtNameUser.AutoSize = true;
-            this.txtNameUser.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNameUser.ForeColor = System.Drawing.Color.White;
-            this.txtNameUser.Location = new System.Drawing.Point(642, 87);
-            this.txtNameUser.Name = "txtNameUser";
-            this.txtNameUser.Size = new System.Drawing.Size(74, 29);
-            this.txtNameUser.TabIndex = 3;
-            this.txtNameUser.Text = "David";
-            // 
             // Menu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(764, 769);
             this.ControlBox = false;
             this.Controls.Add(this.label4);

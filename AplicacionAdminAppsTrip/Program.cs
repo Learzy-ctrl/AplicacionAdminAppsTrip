@@ -1,5 +1,6 @@
 ﻿using AplicacionAdminAppsTrip.View;
 using AplicacionAdminAppsTrip.View.Login;
+using AplicacionAdminAppsTrip.View.Sales;
 using System;
 using System.Collections.Generic;
 using System.Linq;
