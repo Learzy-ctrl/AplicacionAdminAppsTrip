@@ -23,6 +23,12 @@ namespace AplicacionAdminAppsTrip.ViewModel
         public string NumberPassengers { get; set; }
         public string OptionQuote { get; set; }
         public string TotalPrice { get; set;}
+        public string QuoteDateSent { get; set; }
+        public string QuoteDateConfirmed { get; set; }
+        public string QuoteDateRejected { get; set; }
+        public string CancelledTravelDate { get; set; }
+        public string SecondOption { get; set; }
+        public string IdDevice { get; set; }
 
     }
 }

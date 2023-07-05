@@ -16,10 +16,12 @@ namespace AplicacionAdminAppsTrip.View.Login
     public partial class Login : Form
     {
         private readonly Menu FormMenu = null;
+        private readonly LoginController controller = null;
         public Login()
         {
             InitializeComponent();
             FormMenu = new Menu();
+            controller = new LoginController();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -34,24 +36,31 @@ namespace AplicacionAdminAppsTrip.View.Login
 
         
 
-        public void Validation() 
+        public async void Validation() 
         {
-            var user = credential();
-            if (true)
+
+            var user = await controller.AuthenticationAsync(credential());
+            if(user.Name == "Error")
             {
-                List<Form> Primaryform = new List<Form>();
-                Primaryform.Add(this);
-                user.IdAccess = "4";
-                FormMenu.SetCredentials(user);
-                FormMenu.Show();
-                FormMenu.SetFormList(Primaryform);
-                this.Hide();
-            } 
+                MessageBox.Show("Falla en la conexion a internet", "Error");
+            }
             else
             {
-                MessageBox.Show("La contraseña o usuario son incorrectos, intenta de nuevo", "Error");
-                txtName.Text = "";
-                txtPassword.Text = "";
+                if (user.Name != "NotFound")
+                {
+                    List<Form> Primaryform = new List<Form>();
+                    Primaryform.Add(this);
+                    FormMenu.SetCredentials(user);
+                    FormMenu.Show();
+                    FormMenu.SetFormList(Primaryform);
+                    this.Hide();
+                }
+                else
+                {
+                    MessageBox.Show("La contraseña o usuario son incorrectos, intenta de nuevo", "Error");
+                    txtName.Text = "";
+                    txtPassword.Text = "";
+                }
             }
         }
 

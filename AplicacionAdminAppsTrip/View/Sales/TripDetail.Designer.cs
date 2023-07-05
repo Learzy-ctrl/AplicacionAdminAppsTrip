@@ -31,6 +31,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.LoadingGif = new System.Windows.Forms.PictureBox();
             this.txtNumberPassangers = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.txtRoundTrip = new System.Windows.Forms.TextBox();
@@ -61,11 +62,14 @@
             this.txtPrice = new System.Windows.Forms.TextBox();
             this.SendQuotebtn = new System.Windows.Forms.Button();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.rejectedlbl = new System.Windows.Forms.Label();
+            this.txtpricerejected = new System.Windows.Forms.TextBox();
             this.panel5 = new System.Windows.Forms.Panel();
             this.txtService = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.LoadingGif)).BeginInit();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -96,6 +100,7 @@
             this.panel2.BackColor = System.Drawing.Color.White;
             this.panel2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Controls.Add(this.LoadingGif);
             this.panel2.Controls.Add(this.txtNumberPassangers);
             this.panel2.Controls.Add(this.label9);
             this.panel2.Controls.Add(this.txtRoundTrip);
@@ -117,6 +122,16 @@
             this.panel2.Size = new System.Drawing.Size(545, 280);
             this.panel2.TabIndex = 17;
             this.panel2.Tag = "";
+            // 
+            // LoadingGif
+            // 
+            this.LoadingGif.Image = global::AplicacionAdminAppsTrip.Properties.Resources.loading;
+            this.LoadingGif.Location = new System.Drawing.Point(372, 91);
+            this.LoadingGif.Name = "LoadingGif";
+            this.LoadingGif.Size = new System.Drawing.Size(97, 99);
+            this.LoadingGif.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.LoadingGif.TabIndex = 33;
+            this.LoadingGif.TabStop = false;
             // 
             // txtNumberPassangers
             // 
@@ -381,6 +396,8 @@
             this.panel4.BackColor = System.Drawing.Color.White;
             this.panel4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel4.Controls.Add(this.rejectedlbl);
+            this.panel4.Controls.Add(this.txtpricerejected);
             this.panel4.Controls.Add(this.SendQuotebtn);
             this.panel4.Controls.Add(this.txtPrice);
             this.panel4.Controls.Add(this.label13);
@@ -389,6 +406,25 @@
             this.panel4.Size = new System.Drawing.Size(377, 89);
             this.panel4.TabIndex = 35;
             this.panel4.Tag = "";
+            // 
+            // rejectedlbl
+            // 
+            this.rejectedlbl.AutoSize = true;
+            this.rejectedlbl.Location = new System.Drawing.Point(122, 3);
+            this.rejectedlbl.Name = "rejectedlbl";
+            this.rejectedlbl.Size = new System.Drawing.Size(116, 16);
+            this.rejectedlbl.TabIndex = 27;
+            this.rejectedlbl.Text = "Precio rechazado:";
+            this.rejectedlbl.Visible = false;
+            // 
+            // txtpricerejected
+            // 
+            this.txtpricerejected.Location = new System.Drawing.Point(244, 3);
+            this.txtpricerejected.Name = "txtpricerejected";
+            this.txtpricerejected.ReadOnly = true;
+            this.txtpricerejected.Size = new System.Drawing.Size(110, 22);
+            this.txtpricerejected.TabIndex = 26;
+            this.txtpricerejected.Visible = false;
             // 
             // panel5
             // 
@@ -434,6 +470,7 @@
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel2);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "TripDetail";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -442,6 +479,7 @@
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.LoadingGif)).EndInit();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.panel4.ResumeLayout(false);
@@ -491,5 +529,8 @@
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.TextBox txtService;
         private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.PictureBox LoadingGif;
+        private System.Windows.Forms.Label rejectedlbl;
+        private System.Windows.Forms.TextBox txtpricerejected;
     }
 }

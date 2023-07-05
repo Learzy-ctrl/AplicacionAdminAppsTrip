@@ -1,13 +1,8 @@
 ﻿using AplicacionAdminAppsTrip.Controller;
+using AplicacionAdminAppsTrip.Services;
 using AplicacionAdminAppsTrip.ViewModel;
+using FirebaseAdmin.Messaging;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AplicacionAdminAppsTrip.View.Sales
@@ -15,13 +10,18 @@ namespace AplicacionAdminAppsTrip.View.Sales
     public partial class TripDetail : Form
     {
         TripVM tripVM = new TripVM();
+        Sales salesform = new Sales();
+        DeclinedServices declinedServices = new DeclinedServices();
         private readonly SalesController salesController = null;
-        public TripDetail(TripVM trip)
+        public TripDetail(TripVM trip, Sales form, DeclinedServices declined)
         {
             InitializeComponent();
             GetDataFromSales(trip);
             salesController = new SalesController();
+            declinedServices = declined;
+            salesform = form;
             tripVM = trip;
+            LoadingGif.Hide();
         }
 
         public void GetDataFromSales(TripVM trip)
@@ -31,14 +31,7 @@ namespace AplicacionAdminAppsTrip.View.Sales
             txtStartDate.Text = trip.StartDate;
             txtEndDate.Text = trip.EndDate;
             txtStartDateTime.Text = trip.StartDateTime;
-            if (string.IsNullOrEmpty(trip.BackDateTime))
-            {
-                txtEndDateTime.Text = "Sin Hora Retorno";
-            }
-            else
-            {
-                txtEndDateTime.Text = trip.BackDateTime;
-            }
+            txtEndDateTime.Text = trip.BackDateTime;
             txtRoundTrip.Text = trip.Rounded;
             txtNumberPassangers.Text = trip.NumberPassengers;
             txtNameUser.Text = trip.Name;
@@ -59,16 +52,76 @@ namespace AplicacionAdminAppsTrip.View.Sales
             {
                 txtService.Text = trip.OptionQuote;
             }
-
+            if(trip.TotalPrice != null)
+            {
+                if (trip.SecondOption == "true")
+                {
+                    txtpricerejected.Visible = true;
+                    txtpricerejected.Text = trip.TotalPrice;
+                    rejectedlbl.Visible = true;
+                    txtPrice.ReadOnly = false;
+                    SendQuotebtn.Visible = true;
+                }
+                else
+                {
+                    txtPrice.Text = trip.TotalPrice;
+                    txtPrice.ReadOnly = true;
+                    SendQuotebtn.Visible = false;
+                }
+            }
         }
 
         private async void SendQuotebtn_Click(object sender, EventArgs e)
         {
-            tripVM.TotalPrice = txtPrice.Text;
-            await salesController.DeletePendingQuote(tripVM.UserId, tripVM.Key);
-            await salesController.SendPendingQuote(tripVM);
-            MessageBox.Show("Se ha enviado Correctamente", "Exito");
-            this.Close();
+            if (!string.IsNullOrEmpty(txtPrice.Text))
+            {
+                LoadingGif.Show();
+                tripVM.TotalPrice = txtPrice.Text;
+                bool IsValid;
+                if(tripVM.SecondOption == "true")
+                {
+                    IsValid = await salesController.DeleteRejectedTrip(tripVM.UserId, tripVM.Key);
+                    await declinedServices.RefreshTable();
+                }
+                else
+                {
+                    IsValid = await salesController.DeletePendingQuote(tripVM.UserId, tripVM.Key);
+                    await salesform.RefreshTable();
+                }
+                if (IsValid)
+                {
+                    await salesController.SendPendingQuote(tripVM);
+                    SendNotification(tripVM.EndPoint, tripVM.IdDevice);
+                    LoadingGif.Hide();
+                    MessageBox.Show("Se ha enviado Correctamente", "Exito");
+                    this.Close();
+                }
+                else
+                {
+                    LoadingGif.Hide();
+                    MessageBox.Show("Ocurrio un error, Intenta de nuevo", "Error");
+                    this.Close();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Ingresa el precio", "Alerta");
+            }
+        }
+
+        public void SendNotification(string EndPoint, string IdDevice)
+        {
+            var messaging = FirebaseMessaging.GetMessaging(Conection.app);
+            var message = new FirebaseAdmin.Messaging.Message()
+            {
+                Token = IdDevice,
+                Notification = new Notification()
+                {
+                    Title = "Tienes Nuevas Cotizaciones",
+                    Body = "Se realizo cotizacion de tu viaje a: " + EndPoint
+                }
+            };
+            messaging.SendAsync(message).GetAwaiter().GetResult();
         }
     }
 }

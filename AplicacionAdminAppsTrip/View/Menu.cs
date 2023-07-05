@@ -38,18 +38,26 @@ namespace AplicacionAdminAppsTrip.View
         }
         private void SalesPicture_Click(object sender, EventArgs e)
         {
-            var firstform = formList.FirstOrDefault();
-            formList.Clear();
-            formList.Add(firstform);
-            formList.Add(this);
-            salesForm.SetFormList(formList);
-            salesForm.Show();
-            this.Hide();
+            if(credentials.IdAccess == "1" || credentials.IdAccess == "0")
+            {
+                var firstform = formList.FirstOrDefault();
+                formList.Clear();
+                formList.Add(firstform);
+                formList.Add(this);
+                salesForm.SetFormList(formList);
+                salesForm.Show();
+                this.Hide();
+            }
+            else
+            {
+                MessageBox.Show("No tienes permiso para esta opcion", "Acceso Denegado");
+            }
+            
         }
 
         private void AssignamentPicture_Click(object sender, EventArgs e)
         {
-            if (credentials.IdAccess == "2")
+            if (credentials.IdAccess == "2" || credentials.IdAccess == "0")
             {
                 var firstform = formList.FirstOrDefault();
                 formList.Clear();
@@ -61,20 +69,28 @@ namespace AplicacionAdminAppsTrip.View
             }
             else
             {
-                MessageBox.Show("No tienes permiso para esta opcion", "Error Acceso");
+                MessageBox.Show("No tienes permiso para esta opcion", "Acceso Denegado");
             }
            
         }
 
         private void UserManagmentPicture_Click(object sender, EventArgs e)
         {
-            var firstform = formList.FirstOrDefault();
-            formList.Clear();
-            formList.Add(firstform);
-            formList.Add(this);
-            managmentForm.SetFormList(formList);
-            managmentForm.Show();
-            this.Hide();
+            if(credentials.IdAccess == "0")
+            {
+                var firstform = formList.FirstOrDefault();
+                formList.Clear();
+                formList.Add(firstform);
+                formList.Add(this);
+                managmentForm.SetFormList(formList);
+                managmentForm.Show();
+                this.Hide();
+            }
+            else
+            {
+                MessageBox.Show("No tienes permiso para esta opcion", "Acceso Denegado");
+            }
+            
         }
 
         private void ReportsPicture_Click(object sender, EventArgs e)
