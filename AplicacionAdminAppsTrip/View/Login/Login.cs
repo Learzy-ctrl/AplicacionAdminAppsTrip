@@ -15,13 +15,12 @@ namespace AplicacionAdminAppsTrip.View.Login
 {
     public partial class Login : Form
     {
-        private readonly Menu FormMenu = null;
         private readonly LoginController controller = null;
         public Login()
         {
             InitializeComponent();
-            FormMenu = new Menu();
             controller = new LoginController();
+            LoadingGif.Visible = false;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -38,21 +37,25 @@ namespace AplicacionAdminAppsTrip.View.Login
 
         public async void Validation() 
         {
-
+            LoadingGif.Visible = true;
             var user = await controller.AuthenticationAsync(credential());
-            if(user.Name == "Error")
+            LoadingGif.Visible = false;
+            if (user.Email == "Error")
             {
                 MessageBox.Show("Falla en la conexion a internet", "Error");
             }
             else
             {
-                if (user.Name != "NotFound")
+                if (user.Email != "Not Found")
                 {
+                    var FormMenu = new Menu();
                     List<Form> Primaryform = new List<Form>();
                     Primaryform.Add(this);
                     FormMenu.SetCredentials(user);
                     FormMenu.Show();
                     FormMenu.SetFormList(Primaryform);
+                    txtName.Text = "";
+                    txtPassword.Text = "";
                     this.Hide();
                 }
                 else
@@ -65,12 +68,36 @@ namespace AplicacionAdminAppsTrip.View.Login
         }
 
         public CredentialsVM credential()
-        {
+        {   
             CredentialsVM credentialsVM = new CredentialsVM();
-            credentialsVM.Name = txtName.Text;
+            credentialsVM.Email = txtName.Text;
             credentialsVM.Password = txtPassword.Text;
 
             return credentialsVM;
+        }
+
+        private void txtName_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Down)
+            {
+                txtPassword.Focus();
+            }
+            if (e.KeyCode == Keys.Enter)
+            {
+                Validation();
+            }
+        }
+
+        private void txtPassword_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Up)
+            {
+                txtName.Focus();
+            }
+            if (e.KeyCode == Keys.Enter)
+            {
+                Validation();
+            }
         }
     }
 }

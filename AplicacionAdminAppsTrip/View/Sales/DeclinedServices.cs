@@ -22,9 +22,10 @@ namespace AplicacionAdminAppsTrip.View.Sales
             controller = new SalesController();
         }
         //Functions
-        private void Backbtn_Click(object sender, EventArgs e)
+        private async void Backbtn_Click(object sender, EventArgs e)
         {
             sales1.Show();
+            await sales1.RefreshCountButtons();
             this.Close();
         }
         private void DeclinedServices_FormClosed(object sender, FormClosedEventArgs e)

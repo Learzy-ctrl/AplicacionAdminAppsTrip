@@ -1,10 +1,7 @@
-﻿using System;
+﻿using AplicacionAdminAppsTrip.Controller;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -13,10 +10,13 @@ namespace AplicacionAdminAppsTrip.View.TripAssignment
     public partial class Assignment : Form
     {
         private List<Form> forms = null;
+        private readonly TripAssignamentController controller = null;
         public Assignment()
         {
             InitializeComponent();
             forms = new List<Form>();
+            controller = new TripAssignamentController();
+            LoadingGif.Visible = false;
         }
 
         private void Assignment_FormClosed(object sender, FormClosedEventArgs e)
@@ -35,6 +35,24 @@ namespace AplicacionAdminAppsTrip.View.TripAssignment
         public void SetFormList(List<Form> formlist)
         {
             forms = formlist;
+        }
+
+        public async Task RefreshTablePending()
+        {
+            var list = await controller.GetAllPendingAssignments();
+            TripPendingGrid.Rows.Clear();
+            foreach(var l in list)
+            {
+                TripPendingGrid.Rows.Add(l.Key, l.EndPoint, l.StartDate, l.StartDateTime, "🔎");
+            }
+            txtCount.Text = list.Count.ToString();
+        }
+
+        private async void button1_Click(object sender, EventArgs e)
+        {
+            LoadingGif.Visible = true;
+            await RefreshTablePending();
+            LoadingGif.Visible = false;
         }
     }
 }

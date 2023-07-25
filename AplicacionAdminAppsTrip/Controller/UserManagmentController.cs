@@ -15,9 +15,12 @@ namespace AplicacionAdminAppsTrip.Controller
         {
             try
             {
-                var response = await Conection.firebase.Child("LocalUsers").PostAsync(user);
-                user.IdUser = response.Key;
-                await Conection.firebase.Child("LocalUsers").Child(response.Key).PutAsync(user);
+                await Conection.firebase.Child("LocalUsers").Child(user.IdUser).PutAsync(user);
+                var Rol = new Dictionary<string, string>
+                {
+                    { user.IdUser, user.IdUser}
+                };
+                await Conection.firebase.Child("Rol").Child(user.IdUser).PutAsync(Rol);
                 return true;
             }
             catch
@@ -76,6 +79,7 @@ namespace AplicacionAdminAppsTrip.Controller
             try
             {
                 await Conection.firebase.Child("LocalUsers").Child(key).DeleteAsync();
+                await Conection.firebase.Child("Rol").Child(key).DeleteAsync();
                 return true;
             }
             catch

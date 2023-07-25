@@ -4,6 +4,7 @@ using Firebase.Database.Query;
 using System.Collections.Generic;
 using System.IO.Packaging;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
@@ -190,6 +191,98 @@ namespace AplicacionAdminAppsTrip.Controller
             {
                 return null;
             }
+        }
+
+        public async Task<int> GetCountConfirm()
+        {
+            try
+            {
+                var ListTripVMs = new List<List<TripVM>>();
+                var List = new List<TripVM>();
+                var ConfirmQuotes = await Conection.firebase.Child("ConfirmedTrips").OnceAsync<TripVM>();
+                foreach(var c in ConfirmQuotes)
+                {
+                    var tripVMs = new List<TripVM>();
+                    var ConfirmQuote = await Conection.firebase.Child("ConfirmedTrips").Child(c.Key).OnceAsync<TripVM>();
+                    foreach(var quote in ConfirmQuote)
+                    {
+                        tripVMs.Add(quote.Object);
+                    }
+                    ListTripVMs.Add(tripVMs);
+                }
+                foreach(var l in ListTripVMs)
+                {
+                    foreach (var trip in l)
+                    {
+                        List.Add(trip);
+                    }
+                }
+                var filter = List.Where(l => l.ConfirmedChecked == "false").ToList();
+                return filter.Count;
+            }
+            catch
+            {
+                return -1;
+            }
+        }
+
+        public async Task<int> GetCountRejected()
+        {
+            try
+            {
+
+                List<List<TripVM>> tripVMs = new List<List<TripVM>>();
+                List<TripVM> tripList = new List<TripVM>();
+                var ListofList = await Conection.firebase.Child("RejectedTrips").OnceAsync<TripVM>();
+                foreach (var l in ListofList)
+                {
+                    List<TripVM> trips = new List<TripVM>();
+                    var List = await Conection.firebase.Child("RejectedTrips").Child(l.Key).OnceAsync<TripVM>();
+                    foreach (var li in List)
+                    {
+                        TripVM trip = new TripVM();
+                        trip = li.Object;
+                        trips.Add(trip);
+                    }
+                    tripVMs.Add(trips);
+                }
+
+                foreach (var t in tripVMs)
+                {
+                    foreach (var l in t)
+                    {
+                        tripList.Add(l);
+                    }
+                }
+                var list = tripList.Where(l => l.SecondOption == "true").ToList();
+                return list.Count;
+            }
+            catch
+            {
+                return -1;
+            }
+        }
+
+        public async Task<bool> CheckQuoteConfirm(string key, string id)
+        {
+            try
+            {
+                var quote = await GetConfirmTripdetail(key, id);
+                quote.ConfirmedChecked = "true";
+                await Conection.firebase.Child("ConfirmedTrips").Child(id).Child(key).PutAsync(quote);
+                var promise = await Conection.firebase.Child("HistoryTrips").Child(id).PostAsync(quote);
+                quote.Key = promise.Key;
+                await Conection.firebase.Child("HistoryTrips").Child(id).Child(promise.Key).PutAsync(quote);
+                var response = await Conection.firebase.Child("PendingAssignments").PostAsync(quote);
+                quote.Key = response.Key;
+                await Conection.firebase.Child("PendingAssignments").Child(response.Key).PutAsync(quote);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+            
         }
 
 

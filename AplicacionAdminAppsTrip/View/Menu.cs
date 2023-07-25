@@ -1,4 +1,5 @@
 ﻿using AplicacionAdminAppsTrip.Controller;
+using AplicacionAdminAppsTrip.Services;
 using AplicacionAdminAppsTrip.View.Reports;
 using AplicacionAdminAppsTrip.View.Sales;
 using AplicacionAdminAppsTrip.View.TripAssignment;
@@ -107,6 +108,7 @@ namespace AplicacionAdminAppsTrip.View
         private void label5_Click(object sender, EventArgs e)
         {
             var form = formList.FirstOrDefault();
+            Conection.Token = "";
             form.Close();
         }
 
@@ -118,7 +120,27 @@ namespace AplicacionAdminAppsTrip.View
         public void SetCredentials(CredentialsVM credentialVM)
         {
             credentials = credentialVM;
-            txtNameUser.Text = credentials.Name;
+        }
+
+        private void panel2_Click(object sender, EventArgs e)
+        {
+            var login = formList.FirstOrDefault();
+            login.Show();
+            this.Close();
+        }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+            var login = formList.FirstOrDefault();
+            login.Show();
+            this.Close();
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            var login = formList.FirstOrDefault();
+            login.Show();
+            this.Close();
         }
     }
 }

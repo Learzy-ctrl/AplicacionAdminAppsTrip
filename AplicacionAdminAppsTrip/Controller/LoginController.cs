@@ -1,11 +1,10 @@
 ﻿using AplicacionAdminAppsTrip.Model;
 using AplicacionAdminAppsTrip.Services;
 using AplicacionAdminAppsTrip.ViewModel;
+using Firebase.Database.Query;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace AplicacionAdminAppsTrip.Controller
 {
@@ -15,36 +14,24 @@ namespace AplicacionAdminAppsTrip.Controller
         {
             try
             {
-                var ListOfUsers = new List<UserVM>();
-                var list = await Conection.firebase.Child("LocalUsers").OnceAsync<UserVM>();
-                foreach (var l in list)
+                var auth = new UserRepository();
+                var Id = await auth.SignIn(usercredential.Email, usercredential.Password);
+                if(Id != null)
                 {
-                    ListOfUsers.Add(l.Object);
-                }
-                var User = ListOfUsers.FirstOrDefault(l => l.Name.ToLower() == usercredential.Name.ToLower());
-                if (User != null)
-                {
-                    if(User.Password == usercredential.Password)
-                    {
-                        usercredential.IdAccess = User.Rol;
-                        usercredential.Name = User.Name;
-                        return usercredential;
-                    }
-                    else
-                    {
-                        usercredential.Name = "NotFound";
-                        return usercredential;
-                    }
+                    var user = await Conection.firebase.Child("LocalUsers").Child(Conection.UserId).OnceSingleAsync<UserVM>();
+                    usercredential.IdAccess = user.Rol;
+                    return usercredential;
                 }
                 else
                 {
-                    usercredential.Name = "NotFound";
+                    usercredential.Email = "Not Found";
                     return usercredential;
                 }
             }
-            catch
+            catch(Exception e)
             {
-                usercredential.Name = "Error";
+                MessageBox.Show(e.Message);
+                usercredential.Email = "Error";
                 return usercredential;
             }
         }

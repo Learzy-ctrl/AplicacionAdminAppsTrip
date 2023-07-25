@@ -1,5 +1,6 @@
 ﻿using AplicacionAdminAppsTrip.Controller;
 using AplicacionAdminAppsTrip.Model;
+using AplicacionAdminAppsTrip.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -20,10 +21,12 @@ namespace AplicacionAdminAppsTrip.View.User_Managment
         bool ConfirmPasswordEnable = true;
         Managment managment = null;
         private readonly UserManagmentController controller = null;
+        private readonly UserRepository auth = null;
         public CreateUser(Managment managmentForm)
         {
             InitializeComponent();
             controller = new UserManagmentController();
+            auth = new UserRepository();
             managment = managmentForm;
             ComboBoxSetData();
             LoadingGif.Visible = false;
@@ -64,20 +67,27 @@ namespace AplicacionAdminAppsTrip.View.User_Managment
             {
                 LoadingGif.Visible = true;
                 await Task.Delay(500);
-                var response = await controller.PostNewUserAsync(GetUser());
-                LoadingGif.Visible = false;
-                if (response)
+                var UserId = await auth.Register(txtEmail.Text, txtPassword.Text);
+                if(UserId != null)
                 {
-                    MessageBox.Show("Se ha registrado correctamente", "Exito");
-                    managment.RefreshTable("");
-                    this.Close();
-
+                    var response = await controller.PostNewUserAsync(GetUser(UserId));
+                    LoadingGif.Visible = false;
+                    if (response)
+                    {
+                        MessageBox.Show("Se ha registrado correctamente", "Exito");
+                        managment.RefreshTable("");
+                        this.Close();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Hubo un fallo con la conexion de internet", "Error");
+                    }
                 }
                 else
                 {
+                    LoadingGif.Visible = false;
                     MessageBox.Show("Hubo un fallo con la conexion de internet", "Error");
                 }
-                
             }
         }
 
@@ -95,7 +105,7 @@ namespace AplicacionAdminAppsTrip.View.User_Managment
             RolComboBox.DisplayMember = "Name";
         }
 
-        public UserVM GetUser()
+        public UserVM GetUser(string id)
         {
             var user = new UserVM();
             user.Name = txtname.Text;
@@ -104,6 +114,7 @@ namespace AplicacionAdminAppsTrip.View.User_Managment
             user.Email = txtEmail.Text;
             user.Password = txtPassword.Text;
             user.Rol = RolComboBox.SelectedValue.ToString();
+            user.IdUser = id;
             return user;
         }
 
@@ -130,13 +141,15 @@ namespace AplicacionAdminAppsTrip.View.User_Managment
                 MessageBox.Show("Ingresa un numero valido", "Alerta");
                 return false;
             }
-            if (!string.IsNullOrEmpty(txtEmail.Text))
+            if (string.IsNullOrEmpty(txtEmail.Text))
             {
-                if (!ValidateEmail(txtEmail.Text))
-                {
-                    MessageBox.Show("Ingresa un correo valido", "Alerta");
-                    return false;
-                }
+                MessageBox.Show("Ingresa correo electronico", "Alerta");
+                return false;
+            }
+            if (!ValidateEmail(txtEmail.Text))
+            { 
+                MessageBox.Show("Ingresa un correo valido", "Alerta");
+                return false;
             }
             if (string.IsNullOrEmpty(txtPassword.Text))
             {

@@ -1,12 +1,9 @@
 ﻿using AplicacionAdminAppsTrip.Controller;
 using AplicacionAdminAppsTrip.Model;
+using AplicacionAdminAppsTrip.Services;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -17,15 +14,18 @@ namespace AplicacionAdminAppsTrip.View.User_Managment
     {
         bool PasswordEnable = true;
         bool ConfirmPasswordEnable = true;
-        string key;
+        UserVM userVM = null;
+        private readonly UserRepository repository = null;
+
         Managment managment = null;
         private readonly UserManagmentController controller = null;
         public EditUser(UserVM user, Managment formManagment)
         {
             InitializeComponent();
             controller = new UserManagmentController();
-            key = user.IdUser;
+            userVM = user;
             managment = formManagment;
+            repository = new UserRepository();
             ComboBoxSetData();
             SetUserData(user);
             LoadingGif.Visible = false;
@@ -65,20 +65,43 @@ namespace AplicacionAdminAppsTrip.View.User_Managment
             if (IsValid)
             {
                 LoadingGif.Visible = true;
-                await Task.Delay(500);
-                var response = await controller.PutUserAsync(GetUser());
+                await ChangeEmailOrPassword();
+                await PutUserAsync();
                 LoadingGif.Visible = false;
-                if (response)
-                {
-                    MessageBox.Show("Se ha registrado correctamente", "Exito");
-                    managment.RefreshTable("");
-                    this.Close();
-                }
-                else
-                {
-                    MessageBox.Show("Hubo un fallo con la conexion de internet", "Error");
-                }
+            }
+        }
 
+        public async Task ChangeEmailOrPassword()
+        {
+            if(userVM.Email != txtEmail.Text && userVM.Password != txtPassword.Text)
+            {
+                await repository.ChangeEmailAndPasswordAsync(txtEmail.Text, txtPassword.Text, userVM.Email, userVM.Password);
+                return;
+            }
+            if (userVM.Email != txtEmail.Text)
+            {
+                await repository.ChangeEmail(txtEmail.Text, userVM.Email, userVM.Password);
+            }
+            if (userVM.Password != txtPassword.Text)
+            {
+                await repository.ChangePassword(txtPassword.Text, userVM.Email, userVM.Password);
+            }
+        }
+        
+
+        public async Task PutUserAsync()
+        {
+            await Task.Delay(500);
+            var response = await controller.PutUserAsync(GetUser());
+            if (response)
+            {
+                MessageBox.Show("Se ha registrado correctamente", "Exito");
+                managment.RefreshTable("");
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Hubo un fallo con la conexion de internet", "Error");
             }
         }
 
@@ -189,7 +212,7 @@ namespace AplicacionAdminAppsTrip.View.User_Managment
             user.Email = txtEmail.Text;
             user.Password = txtPassword.Text;
             user.Rol = RolComboBox.SelectedValue.ToString();
-            user.IdUser = key;
+            user.IdUser = userVM.IdUser;
             return user;
         }
 

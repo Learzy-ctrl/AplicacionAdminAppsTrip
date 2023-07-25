@@ -47,6 +47,12 @@ namespace AplicacionAdminAppsTrip.View.Sales
                 string UserID = Convert.ToString(dataGridView1.Rows[e.RowIndex].Cells["UserID"].Value);
                 SendDataToTripDetail(key, UserID);
             }
+            if(e.ColumnIndex == dataGridView1.Columns["Confirm"].Index)
+            {
+                string key = Convert.ToString(dataGridView1.Rows[e.RowIndex].Cells["Key"].Value);
+                string UserID = Convert.ToString(dataGridView1.Rows[e.RowIndex].Cells["UserID"].Value);
+                ConfirmTripQuote(key, UserID);
+            }
         }
         private async void RefreshAllbtn_Click(object sender, EventArgs e)
         {
@@ -73,7 +79,7 @@ namespace AplicacionAdminAppsTrip.View.Sales
                     dataGridView1.Rows.Clear();
                     foreach (var l in list)
                     {
-                        dataGridView1.Rows.Add(l.Key, l.UserId, l.EndPoint, l.QuoteDateConfirmed, l.QuoteDateSent, "🔎");
+                        dataGridView1.Rows.Add(l.Key, l.UserId, l.EndPoint, l.QuoteDateConfirmed, l.QuoteDateSent, "🔎", "✔");
                     }
                 }
                 else
@@ -116,7 +122,7 @@ namespace AplicacionAdminAppsTrip.View.Sales
                         tripVMs.Add(l);
                     }
                 }
-                return tripVMs;
+                return tripVMs.Where(t => t.ConfirmedChecked == "false").ToList();
             }
             else
             {
@@ -157,6 +163,23 @@ namespace AplicacionAdminAppsTrip.View.Sales
             TripDetail tripDetail = new TripDetail(Trip, null, null);
             LoadingGif.Hide();
             tripDetail.ShowDialog();
+        }
+
+        public async void ConfirmTripQuote(string key, string id)
+        {
+            LoadingGif.Visible = true;
+            var isValid = await controller.CheckQuoteConfirm(key, id);
+            LoadingGif.Visible = false;
+            if (isValid)
+            {
+                await RefreshTable();
+                MessageBox.Show("Se ha confirmado viaje", "Exito");
+                await sales1.RefreshCountButtons();
+            }
+            else
+            {
+                MessageBox.Show("Ocurio un error, vuelve a intentarlo", "Error");
+            }
         }
         public void SetFormPrevious(Sales sales)
         {

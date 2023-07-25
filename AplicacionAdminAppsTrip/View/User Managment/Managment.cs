@@ -1,5 +1,6 @@
 ﻿using AplicacionAdminAppsTrip.Controller;
 using AplicacionAdminAppsTrip.Model;
+using AplicacionAdminAppsTrip.Services;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -13,11 +14,13 @@ namespace AplicacionAdminAppsTrip.View.User_Managment
     {
         private List<Form> forms = null;
         private readonly UserManagmentController controller = null;
+        private readonly UserRepository repository = null;
         public Managment()
         {
             InitializeComponent();
             forms = new List<Form>();
             controller = new UserManagmentController();
+            repository = new UserRepository();
             LoadingGif.Visible = false;
             ComboBoxSetData();
         }
@@ -75,35 +78,48 @@ namespace AplicacionAdminAppsTrip.View.User_Managment
         {
             if (e.ColumnIndex == dataGridView1.Columns["Edit"].Index)
             {
+                LoadingGif.Visible = true;
                 string key = Convert.ToString(dataGridView1.Rows[e.RowIndex].Cells["userKey"].Value);
                 var user = await controller.GetUserAsync(key);
                 var edituser = new EditUser(user, this);
+                LoadingGif.Visible = false;
                 edituser.ShowDialog();
             }
             if (e.ColumnIndex == dataGridView1.Columns["Delete"].Index)
             {
                 string key = Convert.ToString(dataGridView1.Rows[e.RowIndex].Cells["userKey"].Value);
+                string rol = Convert.ToString(dataGridView1.Rows[e.RowIndex].Cells["Rol"].Value);
                 var Response = MessageBox.Show("¿Estas seguro de eliminar este usuario?", "Eliminar usuario", MessageBoxButtons.OKCancel);
                 if(Response == DialogResult.OK)
                 {
                     LoadingGif.Visible = true;
                     await Task.Delay(500);
-                    var IsDelete = await controller.DeleteUser(key);
-                    LoadingGif.Visible = false;
-                    RefreshTable("");
-                    if (IsDelete)
+                    var valid = await repository.Deleteuser(key);
+                    if (valid)
                     {
-                        MessageBox.Show("Se ha eliminado el usuario", "Exito");
+                        var IsDelete = await controller.DeleteUser(key);
+                        LoadingGif.Visible = false;
+                        RefreshTable("");
+                        if (IsDelete)
+                        {
+                            MessageBox.Show("Se ha eliminado el usuario", "Exito");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Se interrumpio la conexion a internet", "Error");
+                        }
                     }
                     else
                     {
                         MessageBox.Show("Se interrumpio la conexion a internet", "Error");
                     }
+                    
                 }
             }
         }
         private void Managment_Load(object sender, EventArgs e)
         {
+            
             ComboBoxRolSetData();
             txtConsultation.Visible = false;
             btnSubmit.Visible = false;
@@ -130,6 +146,7 @@ namespace AplicacionAdminAppsTrip.View.User_Managment
         }
         public async void RefreshTable(string variable)
         {
+            LoadingGif.Visible = true;
             var List = await FilterUser(variable);
             if(List != null)
             {
@@ -139,9 +156,11 @@ namespace AplicacionAdminAppsTrip.View.User_Managment
                     dataGridView1.Rows.Add(l.IdUser, l.Name, l.LastName, RolUser(l.Rol), l.PhoneNumber, EmailEmpty(l.Email), "📝", "❌");
                 }
                 txtCount.Text = List.Count.ToString();
+                LoadingGif.Visible = false;
             }
             else
             {
+                LoadingGif.Visible = false;
                 MessageBox.Show("Se interrumpio la conexion a internet", "Error");
             }
         }

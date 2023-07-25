@@ -28,6 +28,7 @@ namespace AplicacionAdminAppsTrip.View.Sales
         private async void timer1_Tick(object sender, EventArgs e)
         {
             await RefreshTable();
+            await RefreshCountButtons();
         }
         private void InitializeTimer()
         {
@@ -41,19 +42,48 @@ namespace AplicacionAdminAppsTrip.View.Sales
             var firstform = forms.FirstOrDefault();
             firstform.Close();
         }
-        
-
+        private async void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == dataGridView1.Columns["Detail"].Index)
+            {
+                string key = Convert.ToString(dataGridView1.Rows[e.RowIndex].Cells["Key"].Value);
+                string UserID = Convert.ToString(dataGridView1.Rows[e.RowIndex].Cells["UserID"].Value);
+                LoadingGif.Show();
+                await SendDataToTripDetail(key, UserID);
+            }
+        }
+        private void ServicesConfirmbtn_Click(object sender, EventArgs e)
+        {
+            ServicesConfirm servicesConfirm = new ServicesConfirm();
+            servicesConfirm.SetFormPrevious(this);
+            servicesConfirm.Show();
+            this.Hide();
+        }
+        private void DeclinedServicesbtn_Click(object sender, EventArgs e)
+        {
+            DeclinedServices declinedServices = new DeclinedServices();
+            declinedServices.SetFormPrevious(this);
+            declinedServices.Show();
+            this.Hide();
+        }
+        private async void Sales_Load(object sender, EventArgs e)
+        {
+            LoadingGif.Show();
+            await RefreshTable();
+            await RefreshCountButtons();
+            LoadingGif.Hide();
+        }
         private void button1_Click(object sender, EventArgs e)
         {
             var menu = forms.LastOrDefault();
             menu.Show();
             this.Hide();
         }
-
         private async void Refreshbtn_Click(object sender, EventArgs e)
         {
             LoadingGif.Show();
             await RefreshTable();
+            await RefreshCountButtons();
             LoadingGif.Hide();
         }
 
@@ -117,38 +147,17 @@ namespace AplicacionAdminAppsTrip.View.Sales
             LoadingGif.Hide();
             tripDetail.ShowDialog();
         }
-        private async void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+
+        public async Task RefreshCountButtons()
         {
-            if (e.ColumnIndex == dataGridView1.Columns["Detail"].Index)
+            var countConfirm = await salesController.GetCountConfirm();
+            var countRejected = await salesController.GetCountRejected();
+            if(countRejected != -1 || countConfirm != -1)
             {
-                string key = Convert.ToString(dataGridView1.Rows[e.RowIndex].Cells["Key"].Value);
-                string UserID = Convert.ToString(dataGridView1.Rows[e.RowIndex].Cells["UserID"].Value);
-                LoadingGif.Show();
-                await SendDataToTripDetail(key, UserID);
+                ServicesConfirmbtn.Text = "Servicios Confirmados " + "( " + countConfirm + " )";
+                DeclinedServicesbtn.Text = "Servicios Rechazados " + "( " + countRejected + " )";
             }
         }
-
-        private void ServicesConfirmbtn_Click(object sender, EventArgs e)
-        {
-            ServicesConfirm servicesConfirm = new ServicesConfirm();
-            servicesConfirm.SetFormPrevious(this);
-            servicesConfirm.Show();
-            this.Hide();
-        }
-
-        private void DeclinedServicesbtn_Click(object sender, EventArgs e)
-        {
-            DeclinedServices declinedServices = new DeclinedServices();
-            declinedServices.SetFormPrevious(this);
-            declinedServices.Show();
-            this.Hide();
-        }
-
-        private async void Sales_Load(object sender, EventArgs e)
-        {
-            LoadingGif.Show();
-            await RefreshTable();
-            LoadingGif.Hide();
-        }
+        
     }
 }
