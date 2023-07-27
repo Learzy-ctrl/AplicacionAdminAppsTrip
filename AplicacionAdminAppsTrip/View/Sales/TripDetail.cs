@@ -86,6 +86,7 @@ namespace AplicacionAdminAppsTrip.View.Sales
                 else
                 {
                     IsValid = await salesController.DeletePendingQuote(tripVM.UserId, tripVM.Key);
+                    await salesform.RefreshCountButtons();
                     await salesform.RefreshTable();
                 }
                 if (IsValid)

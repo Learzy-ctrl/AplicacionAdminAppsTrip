@@ -1,4 +1,5 @@
 ﻿using AplicacionAdminAppsTrip.Controller;
+using AplicacionAdminAppsTrip.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,9 +38,8 @@ namespace AplicacionAdminAppsTrip.View.TripAssignment
             forms = formlist;
         }
 
-        public async Task RefreshTablePending()
+        public  void RefreshTablePending(List<TripVM> list)
         {
-            var list = await controller.GetAllPendingAssignments();
             TripPendingGrid.Rows.Clear();
             foreach(var l in list)
             {
@@ -51,8 +51,56 @@ namespace AplicacionAdminAppsTrip.View.TripAssignment
         private async void button1_Click(object sender, EventArgs e)
         {
             LoadingGif.Visible = true;
-            await RefreshTablePending();
+            var list = await controller.GetAllPendingAssignments();
+            RefreshTablePending(list);
             LoadingGif.Visible = false;
+        }
+
+        private async void SearchDateBtn_Click(object sender, EventArgs e)
+        {
+            LoadingGif.Visible = true;
+            var date = DatePicker1.Value;
+            var list = await controller.GetPendingsAssignamentsForDate(date.ToString("dd/MM/yyyy"));
+            RefreshTablePending(list);
+            LoadingGif.Visible = false;
+        }
+
+        private async void Assignment_Load(object sender, EventArgs e)
+        {
+            var list = await controller.GetAllPendingAssignments();
+            RefreshTablePending(list);
+        }
+
+        private void TripPendingGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if(e.ColumnIndex == TripPendingGrid.Columns["Detail"].Index)
+            {
+                var id = Convert.ToString(TripPendingGrid.Rows[e.RowIndex].Cells["id"].Value);
+                GoToAssignamentDetail(id);
+            }
+        }
+
+        public async void GoToAssignamentDetail(string id)
+        {
+            LoadingGif.Visible = true;
+            await Task.Delay(500);
+            var trip = await controller.GetPendingAssignament(id);
+            LoadingGif.Visible = false;
+            if(trip != null)
+            {
+                var formDetail = new AssignamentDetail(trip);
+                formDetail.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Ocurrio un error, intenta mas tarde", "Error");
+            }
+        }
+
+        private void SendNewAssignament_Click(object sender, EventArgs e)
+        {
+            var formDetail = new AssignamentDetail(null);
+            formDetail.ShowDialog();
         }
     }
 }

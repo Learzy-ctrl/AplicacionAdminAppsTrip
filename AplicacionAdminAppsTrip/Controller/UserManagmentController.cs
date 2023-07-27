@@ -16,11 +16,14 @@ namespace AplicacionAdminAppsTrip.Controller
             try
             {
                 await Conection.firebase.Child("LocalUsers").Child(user.IdUser).PutAsync(user);
-                var Rol = new Dictionary<string, string>
+                if(user.Rol != "3")
                 {
-                    { user.IdUser, user.IdUser}
-                };
-                await Conection.firebase.Child("Rol").Child(user.IdUser).PutAsync(Rol);
+                    var Rol = new Dictionary<string, string>
+                    {
+                        { user.IdUser, user.IdUser}
+                    };
+                    await Conection.firebase.Child("Rol").Child(user.IdUser).PutAsync(Rol);
+                }
                 return true;
             }
             catch

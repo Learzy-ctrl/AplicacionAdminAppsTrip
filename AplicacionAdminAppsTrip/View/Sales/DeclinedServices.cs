@@ -22,10 +22,9 @@ namespace AplicacionAdminAppsTrip.View.Sales
             controller = new SalesController();
         }
         //Functions
-        private async void Backbtn_Click(object sender, EventArgs e)
+        private void Backbtn_Click(object sender, EventArgs e)
         {
             sales1.Show();
-            await sales1.RefreshCountButtons();
             this.Close();
         }
         private void DeclinedServices_FormClosed(object sender, FormClosedEventArgs e)
@@ -85,7 +84,7 @@ namespace AplicacionAdminAppsTrip.View.Sales
                 return;
             }
             LoadingGif.Hide();
-            TripDetail trip = new TripDetail(RejectedTrip, null, this);
+            TripDetail trip = new TripDetail(RejectedTrip, sales1, this);
             trip.ShowDialog();
         }
     }

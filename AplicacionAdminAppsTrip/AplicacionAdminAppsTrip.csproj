@@ -157,6 +157,7 @@
     <Compile Include="Controller\SalesController.cs" />
     <Compile Include="Controller\TripAssignamentController.cs" />
     <Compile Include="Controller\UserManagmentController.cs" />
+    <Compile Include="Model\AssignamentVM.cs" />
     <Compile Include="Model\ConsultationVM.cs" />
     <Compile Include="Model\UserVM.cs" />
     <Compile Include="Program.cs" />
@@ -213,6 +214,12 @@
     </Compile>
     <Compile Include="View\Sales\TripDetail.Designer.cs">
       <DependentUpon>TripDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\TripAssignment\AssignamentDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\TripAssignment\AssignamentDetail.Designer.cs">
+      <DependentUpon>AssignamentDetail.cs</DependentUpon>
     </Compile>
     <Compile Include="View\TripAssignment\Assignment.cs">
       <SubType>Form</SubType>
@@ -271,6 +278,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\Sales\TripDetail.resx">
       <DependentUpon>TripDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\TripAssignment\AssignamentDetail.resx">
+      <DependentUpon>AssignamentDetail.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\TripAssignment\Assignment.resx">
       <DependentUpon>Assignment.cs</DependentUpon>
