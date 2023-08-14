@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace AplicacionAdminAppsTrip.Services
@@ -99,8 +100,9 @@ namespace AplicacionAdminAppsTrip.Services
                 var response = await authProvider.CreateUserWithEmailAndPasswordAsync(email, password);
                 return response.User.LocalId;
             }
-            catch
+            catch (Exception e)
             {
+                MessageBox.Show(e.Message);
                 return null;
             }
         }

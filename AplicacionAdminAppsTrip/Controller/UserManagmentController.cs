@@ -51,6 +51,24 @@ namespace AplicacionAdminAppsTrip.Controller
             }
         }
 
+        public async Task<List<UserVM>> GetUserCustumersAsync()
+        {
+            try
+            {
+                var List = new List<UserVM>();
+                var ListOfUsers = await Conection.firebase.Child("Users").OnceAsync<UserVM>();
+                foreach (var l in ListOfUsers)
+                {
+                    List.Add(l.Object);
+                }
+                return List;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
         public async Task<UserVM> GetUserAsync(string key)
         {
             try

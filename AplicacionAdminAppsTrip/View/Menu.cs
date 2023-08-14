@@ -103,6 +103,7 @@ namespace AplicacionAdminAppsTrip.View
             reportsForm.SetFormList(formList);
             reportsForm.Show();
             this.Hide();
+            //MessageBox.Show("Acceso denegado", "Alerta");
         }
 
         private void label5_Click(object sender, EventArgs e)

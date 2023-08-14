@@ -36,10 +36,13 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Assignment));
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.BackToMenuBtn = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.LoadingGif = new System.Windows.Forms.PictureBox();
             this.SendNewAssignament = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
@@ -54,13 +57,13 @@
             this.Time = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Detail = new System.Windows.Forms.DataGridViewButtonColumn();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.Loading2 = new System.Windows.Forms.PictureBox();
             this.label6 = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
             this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
-            this.label3 = new System.Windows.Forms.Label();
+            this.CountLbl = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.ConfirmPendingGrid = new System.Windows.Forms.DataGridView();
             this.idconfirm = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -69,15 +72,14 @@
             this.operador = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Dateconfirm = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DetailConfirm = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.LoadingGif = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.LoadingGif)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.TripPendingGrid)).BeginInit();
             this.panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Loading2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ConfirmPendingGrid)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.LoadingGif)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -113,6 +115,17 @@
             this.BackToMenuBtn.UseVisualStyleBackColor = true;
             this.BackToMenuBtn.Click += new System.EventHandler(this.BackToMenuBtn_Click);
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::AplicacionAdminAppsTrip.Properties.Resources.LOGOTRIP;
+            this.pictureBox1.Location = new System.Drawing.Point(1229, 7);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(87, 92);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
+            // 
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.White;
@@ -131,6 +144,17 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(634, 465);
             this.panel2.TabIndex = 3;
+            // 
+            // LoadingGif
+            // 
+            this.LoadingGif.Image = global::AplicacionAdminAppsTrip.Properties.Resources.loading;
+            this.LoadingGif.Location = new System.Drawing.Point(275, 189);
+            this.LoadingGif.Margin = new System.Windows.Forms.Padding(2);
+            this.LoadingGif.Name = "LoadingGif";
+            this.LoadingGif.Size = new System.Drawing.Size(73, 80);
+            this.LoadingGif.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.LoadingGif.TabIndex = 35;
+            this.LoadingGif.TabStop = false;
             // 
             // SendNewAssignament
             // 
@@ -296,13 +320,13 @@
             // 
             this.panel3.BackColor = System.Drawing.Color.White;
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel3.Controls.Add(this.button5);
-            this.panel3.Controls.Add(this.button4);
-            this.panel3.Controls.Add(this.button2);
+            this.panel3.Controls.Add(this.checkBox2);
+            this.panel3.Controls.Add(this.checkBox1);
+            this.panel3.Controls.Add(this.Loading2);
             this.panel3.Controls.Add(this.label6);
             this.panel3.Controls.Add(this.button3);
             this.panel3.Controls.Add(this.dateTimePicker2);
-            this.panel3.Controls.Add(this.label3);
+            this.panel3.Controls.Add(this.CountLbl);
             this.panel3.Controls.Add(this.label4);
             this.panel3.Controls.Add(this.ConfirmPendingGrid);
             this.panel3.Location = new System.Drawing.Point(671, 117);
@@ -311,32 +335,40 @@
             this.panel3.Size = new System.Drawing.Size(634, 465);
             this.panel3.TabIndex = 4;
             // 
-            // button5
+            // checkBox2
             // 
-            this.button5.Location = new System.Drawing.Point(394, 14);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(89, 23);
-            this.button5.TabIndex = 17;
-            this.button5.Text = "Sin confirmar";
-            this.button5.UseVisualStyleBackColor = true;
+            this.checkBox2.AutoSize = true;
+            this.checkBox2.Location = new System.Drawing.Point(405, 17);
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.Size = new System.Drawing.Size(84, 17);
+            this.checkBox2.TabIndex = 38;
+            this.checkBox2.Text = "Confirmados";
+            this.checkBox2.UseVisualStyleBackColor = true;
+            this.checkBox2.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
             // 
-            // button4
+            // checkBox1
             // 
-            this.button4.Location = new System.Drawing.Point(304, 14);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
-            this.button4.TabIndex = 16;
-            this.button4.Text = "Confirmados";
-            this.button4.UseVisualStyleBackColor = true;
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Checked = true;
+            this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox1.Location = new System.Drawing.Point(303, 17);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(87, 17);
+            this.checkBox1.TabIndex = 37;
+            this.checkBox1.Text = "Sin confirmar";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
-            // button2
+            // Loading2
             // 
-            this.button2.Location = new System.Drawing.Point(523, 12);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(90, 23);
-            this.button2.TabIndex = 15;
-            this.button2.Text = "Refrescar tabla";
-            this.button2.UseVisualStyleBackColor = true;
+            this.Loading2.Image = global::AplicacionAdminAppsTrip.Properties.Resources.loading;
+            this.Loading2.Location = new System.Drawing.Point(291, 189);
+            this.Loading2.Margin = new System.Windows.Forms.Padding(2);
+            this.Loading2.Name = "Loading2";
+            this.Loading2.Size = new System.Drawing.Size(73, 80);
+            this.Loading2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.Loading2.TabIndex = 36;
+            this.Loading2.TabStop = false;
             // 
             // label6
             // 
@@ -349,29 +381,30 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(250, 15);
+            this.button3.Location = new System.Drawing.Point(260, 15);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(25, 20);
             this.button3.TabIndex = 13;
             this.button3.Text = "🔎";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // dateTimePicker2
             // 
             this.dateTimePicker2.Location = new System.Drawing.Point(103, 15);
             this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(138, 20);
+            this.dateTimePicker2.Size = new System.Drawing.Size(151, 20);
             this.dateTimePicker2.TabIndex = 12;
             // 
-            // label3
+            // CountLbl
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(224, 435);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(17, 17);
-            this.label3.TabIndex = 9;
-            this.label3.Text = "0";
+            this.CountLbl.AutoSize = true;
+            this.CountLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CountLbl.Location = new System.Drawing.Point(224, 435);
+            this.CountLbl.Name = "CountLbl";
+            this.CountLbl.Size = new System.Drawing.Size(17, 17);
+            this.CountLbl.TabIndex = 9;
+            this.CountLbl.Text = "0";
             // 
             // label4
             // 
@@ -440,6 +473,7 @@
             this.ConfirmPendingGrid.RowTemplate.Height = 40;
             this.ConfirmPendingGrid.Size = new System.Drawing.Size(635, 380);
             this.ConfirmPendingGrid.TabIndex = 6;
+            this.ConfirmPendingGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ConfirmPendingGrid_CellContentClick);
             // 
             // idconfirm
             // 
@@ -485,54 +519,34 @@
             this.DetailConfirm.Name = "DetailConfirm";
             this.DetailConfirm.Width = 65;
             // 
-            // LoadingGif
-            // 
-            this.LoadingGif.Image = global::AplicacionAdminAppsTrip.Properties.Resources.loading;
-            this.LoadingGif.Location = new System.Drawing.Point(275, 189);
-            this.LoadingGif.Margin = new System.Windows.Forms.Padding(2);
-            this.LoadingGif.Name = "LoadingGif";
-            this.LoadingGif.Size = new System.Drawing.Size(73, 80);
-            this.LoadingGif.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.LoadingGif.TabIndex = 35;
-            this.LoadingGif.TabStop = false;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::AplicacionAdminAppsTrip.Properties.Resources.LOGOTRIP;
-            this.pictureBox1.Location = new System.Drawing.Point(1229, 7);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(87, 92);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
-            // 
             // Assignment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(243)))), ((int)(((byte)(245)))));
-            this.ClientSize = new System.Drawing.Size(1334, 593);
+            this.ClientSize = new System.Drawing.Size(1332, 593);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "Assignment";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Assignment";
+            this.Text = "Asignaciones";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Assignment_FormClosed);
             this.Load += new System.EventHandler(this.Assignment_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.LoadingGif)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.TripPendingGrid)).EndInit();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Loading2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ConfirmPendingGrid)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.LoadingGif)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -555,18 +569,15 @@
         private System.Windows.Forms.DataGridViewButtonColumn DetailConfirm;
         private System.Windows.Forms.Label txtCount;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label CountLbl;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button SearchDateBtn;
         private System.Windows.Forms.DateTimePicker DatePicker1;
-        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.DateTimePicker dateTimePicker2;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button SendNewAssignament;
         private System.Windows.Forms.PictureBox LoadingGif;
         private System.Windows.Forms.DataGridViewTextBoxColumn id;
@@ -574,5 +585,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Date;
         private System.Windows.Forms.DataGridViewTextBoxColumn Time;
         private System.Windows.Forms.DataGridViewButtonColumn Detail;
+        private System.Windows.Forms.PictureBox Loading2;
+        private System.Windows.Forms.CheckBox checkBox2;
+        private System.Windows.Forms.CheckBox checkBox1;
     }
 }

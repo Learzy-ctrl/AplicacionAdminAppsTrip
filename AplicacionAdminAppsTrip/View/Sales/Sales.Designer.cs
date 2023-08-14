@@ -33,9 +33,12 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Sales));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label3 = new System.Windows.Forms.Label();
             this.Refreshbtn = new System.Windows.Forms.Button();
             this.DeclinedServicesbtn = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.ServicesConfirmbtn = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.button1 = new System.Windows.Forms.Button();
@@ -49,8 +52,6 @@
             this.Time = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Detail = new System.Windows.Forms.DataGridViewButtonColumn();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.LoadingGif)).BeginInit();
@@ -69,17 +70,28 @@
             this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Controls.Add(this.button1);
             this.panel1.Location = new System.Drawing.Point(1, -1);
-            this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1188, 127);
+            this.panel1.Size = new System.Drawing.Size(891, 103);
             this.panel1.TabIndex = 1;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(210)))), ((int)(((byte)(210)))), ((int)(((byte)(210)))));
+            this.label3.Location = new System.Drawing.Point(123, 22);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(163, 17);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "Cotizaciones Pendientes";
             // 
             // Refreshbtn
             // 
-            this.Refreshbtn.Location = new System.Drawing.Point(668, 75);
-            this.Refreshbtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Refreshbtn.Location = new System.Drawing.Point(501, 61);
+            this.Refreshbtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Refreshbtn.Name = "Refreshbtn";
-            this.Refreshbtn.Size = new System.Drawing.Size(85, 28);
+            this.Refreshbtn.Size = new System.Drawing.Size(64, 23);
             this.Refreshbtn.TabIndex = 4;
             this.Refreshbtn.Text = "Refrescar";
             this.Refreshbtn.UseVisualStyleBackColor = true;
@@ -87,19 +99,32 @@
             // 
             // DeclinedServicesbtn
             // 
-            this.DeclinedServicesbtn.Location = new System.Drawing.Point(428, 75);
+            this.DeclinedServicesbtn.Location = new System.Drawing.Point(321, 61);
+            this.DeclinedServicesbtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.DeclinedServicesbtn.Name = "DeclinedServicesbtn";
-            this.DeclinedServicesbtn.Size = new System.Drawing.Size(217, 28);
+            this.DeclinedServicesbtn.Size = new System.Drawing.Size(163, 23);
             this.DeclinedServicesbtn.TabIndex = 6;
             this.DeclinedServicesbtn.Text = "Servicios Rechazados";
             this.DeclinedServicesbtn.UseVisualStyleBackColor = true;
             this.DeclinedServicesbtn.Click += new System.EventHandler(this.DeclinedServicesbtn_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(210)))), ((int)(((byte)(210)))), ((int)(((byte)(210)))));
+            this.label1.Location = new System.Drawing.Point(20, 10);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(105, 31);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "Ventas";
+            // 
             // ServicesConfirmbtn
             // 
-            this.ServicesConfirmbtn.Location = new System.Drawing.Point(209, 75);
+            this.ServicesConfirmbtn.Location = new System.Drawing.Point(157, 61);
+            this.ServicesConfirmbtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.ServicesConfirmbtn.Name = "ServicesConfirmbtn";
-            this.ServicesConfirmbtn.Size = new System.Drawing.Size(197, 28);
+            this.ServicesConfirmbtn.Size = new System.Drawing.Size(148, 23);
             this.ServicesConfirmbtn.TabIndex = 5;
             this.ServicesConfirmbtn.Text = "Servicios Confirmados";
             this.ServicesConfirmbtn.UseVisualStyleBackColor = true;
@@ -108,20 +133,19 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = global::AplicacionAdminAppsTrip.Properties.Resources.LOGOTRIP;
-            this.pictureBox1.Location = new System.Drawing.Point(1059, 12);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.pictureBox1.Location = new System.Drawing.Point(794, 10);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(112, 110);
+            this.pictureBox1.Size = new System.Drawing.Size(84, 89);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(34, 75);
-            this.button1.Margin = new System.Windows.Forms.Padding(4);
+            this.button1.Location = new System.Drawing.Point(26, 61);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(148, 28);
+            this.button1.Size = new System.Drawing.Size(111, 23);
             this.button1.TabIndex = 3;
             this.button1.Text = "Regresar Menu";
             this.button1.UseVisualStyleBackColor = true;
@@ -130,9 +154,10 @@
             // LoadingGif
             // 
             this.LoadingGif.Image = global::AplicacionAdminAppsTrip.Properties.Resources.loading;
-            this.LoadingGif.Location = new System.Drawing.Point(582, 348);
+            this.LoadingGif.Location = new System.Drawing.Point(436, 283);
+            this.LoadingGif.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.LoadingGif.Name = "LoadingGif";
-            this.LoadingGif.Size = new System.Drawing.Size(97, 99);
+            this.LoadingGif.Size = new System.Drawing.Size(73, 80);
             this.LoadingGif.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.LoadingGif.TabIndex = 7;
             this.LoadingGif.TabStop = false;
@@ -182,8 +207,7 @@
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridView1.EnableHeadersVisualStyles = false;
-            this.dataGridView1.Location = new System.Drawing.Point(6, 4);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridView1.Location = new System.Drawing.Point(4, 3);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -197,7 +221,7 @@
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 70;
-            this.dataGridView1.Size = new System.Drawing.Size(1088, 543);
+            this.dataGridView1.Size = new System.Drawing.Size(816, 441);
             this.dataGridView1.TabIndex = 2;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
@@ -250,50 +274,27 @@
             this.panel2.BackColor = System.Drawing.Color.White;
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel2.Controls.Add(this.dataGridView1);
-            this.panel2.Location = new System.Drawing.Point(44, 152);
+            this.panel2.Location = new System.Drawing.Point(33, 124);
+            this.panel2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1107, 553);
+            this.panel2.Size = new System.Drawing.Size(831, 450);
             this.panel2.TabIndex = 8;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(210)))), ((int)(((byte)(210)))), ((int)(((byte)(210)))));
-            this.label1.Location = new System.Drawing.Point(27, 12);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(125, 38);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "Ventas";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(210)))), ((int)(((byte)(210)))), ((int)(((byte)(210)))));
-            this.label3.Location = new System.Drawing.Point(164, 27);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(194, 20);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "Cotizaciones Pendientes";
             // 
             // Sales
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.ClientSize = new System.Drawing.Size(1190, 730);
+            this.ClientSize = new System.Drawing.Size(892, 593);
             this.Controls.Add(this.LoadingGif);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(4);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "Sales";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Sales";
+            this.Text = "Ventas";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Sales_FormClosed);
             this.Load += new System.EventHandler(this.Sales_Load);
             this.panel1.ResumeLayout(false);

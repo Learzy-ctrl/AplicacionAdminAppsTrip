@@ -37,7 +37,7 @@ namespace AplicacionAdminAppsTrip.Services
 
         public static FirebaseApp app = FirebaseApp.Create(new AppOptions()
         {
-            Credential = GoogleCredential.FromFile("Key.json")
+            Credential = GoogleCredential.FromFile("KeyFirebase.json")
         });
     }
 

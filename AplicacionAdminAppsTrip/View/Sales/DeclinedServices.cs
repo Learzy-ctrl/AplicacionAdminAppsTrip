@@ -51,7 +51,7 @@ namespace AplicacionAdminAppsTrip.View.Sales
         }
         public async Task RefreshTable()
         {
-            var RejectedTrip = await controller.GetAllTripRejected();
+            var RejectedTrip = await controller.GetAllTripRejected(true);
             if(RejectedTrip == null)
             {
                 MessageBox.Show("Conectate a internet", "Alerta");

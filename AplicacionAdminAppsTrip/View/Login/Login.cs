@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
@@ -25,7 +26,7 @@ namespace AplicacionAdminAppsTrip.View.Login
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Validation();
+             Validation();
         }
 
         private void label4_Click(object sender, EventArgs e)
